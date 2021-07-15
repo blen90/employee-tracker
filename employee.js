@@ -1,9 +1,21 @@
-const mysql = require("mysql");
+const mysql2 = require("mysql2");
 const inquirer = require("inquirer");
-const connection = require("./config/connection");
+
+// const connection = mysql2.createConnection(config);
 
 
-const connection = mysql.createConnection(config);
+
+// const sequelize = new Sequelize({
+//     databaseName: process.env.DB_NAME,
+//     host: process.env.DB_HOST,
+//     user: process.env.DB_USER,
+//     password: processenv.DB_PASS, 
+    
+//         host: 'localhost',
+//         dialect: 'mysql',
+//         port: 3306
+    
+// });
 
 
 const start = () => {
@@ -44,6 +56,8 @@ const start = () => {
         }
       });
   };
+
+
 //JOIN TABLES
 
 //SCHEMA
@@ -53,10 +67,38 @@ const start = () => {
 //ROLE
 //after you get an insert google how to get the id from mysql
 
+//Functions depending on the option the user chose
 
-connection.connect((err) => {
-    if (err) throw err;
-    console.log(`connect as id ${connection.threadId}`)
-    start();
+// viewAllEmployees();
 
-});
+
+
+// viewByDepartment();
+
+
+// viewbyManager();
+
+
+// addEmployee();
+
+
+// removeEmployee();
+
+
+// updateEmployeesRole();
+
+
+// updateEmployeesManager();
+
+//Connection and start of app
+
+
+
+// connection.connect((err) => {
+//     if (err) throw err;
+//     console.log(`connect as id ${connection.threadId}`)
+//     start();
+
+// });
+
+start();
