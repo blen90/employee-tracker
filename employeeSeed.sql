@@ -5,7 +5,7 @@ CREATE DATABASE employeesDB;
 USE employeesDB;
 
 CREATE TABLE department (
-  id INTEGER(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  id INTEGER NOT NULL AUTO_INCREMENT PRIMARY KEY,
   name VARCHAR(30) NOT NULL
 );
 
@@ -15,30 +15,34 @@ INSERT INTO department(name)
     ("Engineering"),
     ("IT"),
     ("Legal"),
-    ("Administration"),
     ("Accounting"),
     ("HR");
 
 
 CREATE TABLE role (
-    id INTEGER(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    id INTEGER NOT NULL AUTO_INCREMENT PRIMARY KEY,
     title VARCHAR(30),
     salary DECIMAL NOT NULL,
-    department_id INTEGER(11)
+    department_id INTEGER
 );
 
 INSERT INTO role(title, salary, department_id)
     VALUES 
     ("Sales Manager", 175000, 1),
-    ("Sales Engineer", 125000, 2),
+    ("Salesperson", 125000, 1),
+    ("Engineer Manager", 175000, 2),
+    ("Engineer", 115000, 2),
     ("IT Team Lead", 95000, 3),
-    ("Paralegal", 80000, 4),
-    ("Personal Assistant", 75000, 5),
-    ("Accounting Manager", 178000, 6),
-    ("Recruiter", 100000, 7);
+    ("IT Support", 80000, 3),
+    ("Legal Manager", 175000, 4),
+    ("Lawyer", 75000, 4),
+    ("Accounting Manager", 170000, 5),
+    ("Accountant", 110000, 5),
+    ("HR Generalist", 150000,6),
+    ("Recruiter", 100000, 6);
 
 CREATE TABLE employee (
-    id INTEGER(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    id INTEGER NOT NULL AUTO_INCREMENT PRIMARY KEY,
     first_name VARCHAR(20) NOT NULL,
     last_name VARCHAR(20) NOT NULL,
     role_id INTEGER(10) NOT NULL,
@@ -53,10 +57,39 @@ INSERT INTO employee(first_name, last_name, role_id, manager_id)
     ("Wolfgang", "Orellana", 3, 3),
     ("Balam", "Orellana", 4, 4),
     ("Nena", "Orellana", 5, 5),
-    ("Maya", "Orellana", 6, 6),
-    ("Cosmo", "Orellana", 7, 7);
+    ("Maya", "Orellana", 6, 6);
 
 
 
 
 
+-- use employees;
+-- INSERT INTO department
+--     (name)
+-- VALUES
+--     ('Sales'),
+--     ('Engineering'),
+--     ('Finance'),
+--     ('Legal');
+-- INSERT INTO role
+--     (title, salary, department_id)
+-- VALUES
+--     ('Sales Lead', 100000, 1),
+--     ('Salesperson', 80000, 1),
+--     ('Lead Engineer', 150000, 2),
+--     ('Software Engineer', 120000, 2),
+--     ('Account Manager', 160000, 3),
+--     ('Accountant', 125000, 3),
+--     ('Legal Team Lead', 250000, 4),
+--     ('Lawyer', 190000, 4);
+-- INSERT INTO employee
+--     (first_name, last_name, role_id, manager_id)
+-- VALUES
+--     ('John', 'Doe', 1, NULL),
+--     ('Mike', 'Chan', 2, 1),
+--     ('Ashley', 'Rodriguez', 3, NULL),
+--     ('Kevin', 'Tupik', 4, 3),
+--     ('Kunal', 'Singh', 5, NULL),
+--     ('Malia', 'Brown', 6, 5),
+--     ('Sarah', 'Lourd', 7, NULL),
+--     ('Tom', 'Allen', 8, 7);
