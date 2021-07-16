@@ -87,9 +87,17 @@ function viewAllEmployees() {
 
 
 
+function viewByDepartment() {
+    connection.query('SELECT * FROM department', (err, res) => {
+        if (err){
+            throw err;
+        }
+       console.table(res);
+           
+    })
+    start();
+       }
 
-
-// viewByDepartment();
 
 
 // viewbyManager();
