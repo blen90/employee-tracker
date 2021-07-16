@@ -1,21 +1,23 @@
-const mysql2 = require("mysql2");
+const mysql = require("mysql");
+require('dotenv').config();
 const inquirer = require("inquirer");
 
-// const connection = mysql2.createConnection(config);
-
-
-
-// const sequelize = new Sequelize({
-//     databaseName: process.env.DB_NAME,
-//     host: process.env.DB_HOST,
-//     user: process.env.DB_USER,
-//     password: processenv.DB_PASS, 
+const connection = mysql.createConnection( {
+ 
+    user: process.env.DB_USER,
+    password: process.env.DB_PASSWORD, 
     
-//         host: 'localhost',
-//         dialect: 'mysql',
-//         port: 3306
-    
-// });
+        database: 'employeesDB',
+        host: 'localhost',
+        dialect: 'mysql',
+        port: 3306
+    }
+);
+
+connection.connect((err) => {
+    if (err) throw err;
+    console.log(`connect as id ${connection.threadId}`)
+});
 
 
 const start = () => {
@@ -69,7 +71,21 @@ const start = () => {
 
 //Functions depending on the option the user chose
 
-// viewAllEmployees();
+function viewAllEmployees() {
+     connection.query('SELECT * FROM employee', (err, res) => {
+         if (err){
+             throw err;
+         }
+        console.table(res);
+            
+     })
+     start();
+        }
+        
+     
+
+
+
 
 
 
@@ -94,11 +110,5 @@ const start = () => {
 
 
 
-// connection.connect((err) => {
-//     if (err) throw err;
-//     console.log(`connect as id ${connection.threadId}`)
-//     start();
-
-// });
 
 start();
