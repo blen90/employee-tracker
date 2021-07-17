@@ -1,6 +1,7 @@
 const mysql = require("mysql");
 require('dotenv').config();
 const inquirer = require("inquirer");
+const { restoreDefaultPrompts } = require("inquirer");
 
 const connection = mysql.createConnection({
 
@@ -49,7 +50,7 @@ const start = () => {
                 addRole();
             } else if (answer.options === "Update Employee's Role") {
                 updateEmployeeRole();
-            } else {
+            } else if (answer.options === "Exit") {
                 connection.end();
             }
         });
@@ -196,7 +197,7 @@ function addRole() {
             name: "roleName"
         },
         {
-            type:"input",
+            type: "input",
             message: "What is the Salary for the new role?",
             name: "roleSalary"
         },
@@ -224,7 +225,64 @@ function addRole() {
 
 
 
-// updateEmployeesRole();
+function updateEmployeeRole() {
+    connection.query("SELECT * FROM employee", function (err, res) {
+        if (err)
+            throw err;
+
+        inquirer.prompt([
+            {
+                type: "list",
+                message: "Which employee's role would you like to change?",
+                name: "empName",
+                choices: function () {
+                    employeeList = [];
+                    res.forEach(res => {
+                        employeeList.push(
+                            res.first_name
+                        );
+                    })
+                    return employeeList;
+                }
+            }
+
+        ]).then(function (answer) {
+            const employeeName = answer;
+            console.log(employeeName);
+
+            connection.query("SELECT * FROM role", function (err, res) {
+                if (err)
+                    throw err;
+
+                inquirer.prompt([
+                    {
+                        type: "list",
+                        message: "What is the employee's new role?",
+                        name: "title",
+                        choices: function () {
+                            roleList = [];
+                            res.forEach(res => {
+                                roleList.push(
+                                    res.title
+                                );
+                            })
+                            return roleList;
+                        }
+                    }
+                ]).then(function (roleAnswer) {
+                    const updatedRole = roleAnswer;
+                    console.log(updatedRole);
+
+                   
+
+                })
+            })
+
+        })
+    })
+}
+
+
 
 
 // updateEmployeesManager();
