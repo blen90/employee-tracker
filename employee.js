@@ -57,21 +57,9 @@ const start = () => {
 };
 
 
-//JOIN TABLES
-
-//SCHEMA
-//EMPLOYEE
-//ROLE AND MANAGER ID ARE FOREIGN KEYS IN EMPLOYEE
-
-//ROLE
-//after you get an insert google how to get the id from mysql
-
-//Functions depending on the option the user chose
-
 
 function viewAllEmployees() {
-    const query = "SELECT * FROM employee";
-
+    const query = "SELECT employee.id, employee.first_name, employee.last_name, role_id, department_id, role.title, role.salary, role.id, department.name FROM employee LEFT JOIN role ON role.id = employee.role_id LEFT JOIN department ON department.id = role.department_id";
     connection.query(query, (err, res) => {
         if (err)
             throw err;
@@ -122,8 +110,6 @@ function viewAllDepartments() {
 //        }
 
 
-
-
 function addEmployee() {
     inquirer.prompt([
         {
@@ -136,13 +122,6 @@ function addEmployee() {
             message: "What is the employee's last name?",
             name: "lastName"
         },
-        // {
-        //     type: "list",
-        //     message: "What is the employees title?",
-        //     name: "title",
-        //     choices: ["Salesperson", "Engineer", "IT Support", "Lawyer", "Accountant", "Recruiter"]
-
-        // },
         {
             type: "input",
             message: "What is the employee's role id?",
@@ -154,13 +133,11 @@ function addEmployee() {
             name: "managerId"
         },
 
-
     ]).then(answers => {
         connection.query("INSERT INTO employee SET ?",
             {
                 first_name: answers.name,
                 last_name: answers.lastName,
-                // title: answers.title,
                 role_id: answers.roleId,
                 manager_id: answers.managerId
             }, (err, res) => {
@@ -180,14 +157,21 @@ function addDepartment() {
         message: "What is the new department name?",
         name: "departmentName"
 
-    }).then(function (answer) {
-        const query = "INSERT INTO department SET ?";
-        connection.query(query, function (err, res) {
-            console.log(`You have added ${answer.departmentName} to Departments`)
-        })
+    }).then(answer => {
+        connection.query("INSERT INTO department SET ?", 
+            {
+                name: answer.departmentName
+
+            }, (err, res) => {
+                if (err)
+                    throw err;
+
+            })
+
         viewAllDepartments();
-    })
+    });
 }
+
 
 function addRole() {
     inquirer.prompt([
@@ -222,8 +206,6 @@ function addRole() {
         viewAllRoles();
     });
 }
-
-
 
 function updateEmployeeRole() {
     connection.query("SELECT * FROM employee", function (err, res) {
@@ -273,28 +255,115 @@ function updateEmployeeRole() {
                     const updatedRole = roleAnswer;
                     console.log(updatedRole);
 
-                   
+
 
                 })
             })
-
+               
         })
+
+        start();
     })
 }
 
-
-
-
-// updateEmployeesManager();
-
-//Connection and start of app
-
+//CONNECTION
 
 connection.connect((err) => {
     if (err) throw err;
     console.log(`connect as id ${connection.threadId}`)
 });
 
+//START FUNCTION
+
 start();
+
+
+// function updateEmployeeRole() {
+//     connection.query("SELECT * FROM employee", function (err, res) {
+//         if (err)
+//             throw err;
+
+//         inquirer.prompt([
+//             {
+//                 type: "list",
+//                 message: "Which employee's role would you like to change?",
+//                 name: "empName",
+//                 choices: function () {
+//                     employeeList = [];
+//                     res.forEach(res => {
+//                         employeeList.push(
+//                             res.first_name
+//                         );
+//                     })
+//                     return employeeList;
+//                 }
+//             }
+
+//         ]).then(function (answer) {
+//             const employeeName = answer;
+//             console.log(employeeName);
+
+//             connection.query("SELECT * FROM role", function (err, res) {
+//                 if (err)
+//                     throw err;
+
+//                 inquirer.prompt([
+//                     {
+//                         type: "list",
+//                         message: "What is the employee's new role?",
+//                         name: "title",
+//                         choices: function () {
+//                             roleList = [];
+//                             res.forEach(res => {
+//                                 roleList.push(
+//                                     res.title
+//                                 );
+//                             })
+//                             return roleList;
+//                         }
+//                     }
+//                 ]).then(answer => {
+//                     connection.query("INSERT INTO role SET ?",
+//                         {
+//                             title: answer.title,
+
+//                         }, (err, res) => {
+//                             if (err)
+//                                 throw err;
+
+//                         })
+
+//                     // connection.query("SELECT * FROM role", function (err, res) {
+//     if (err)
+//         throw err;
+
+//     inquirer.prompt([
+//         {
+//             type: "input",
+//             message: "What is the employee's new salary?",
+//             name: "salary"
+//         }
+//     ]).then(answer => {
+//         connection.query("INSERT INTO role.salary SET ?",
+//             {
+//                 salary: answer.salary,
+
+//             }, (err, res) => {
+//                 if (err)
+//                     throw err;
+//             })
+
+//     });
+//                     })
+//                 })
+
+//             })
+//         })
+//     })
+// }
+
+
+
+
 
 
