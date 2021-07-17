@@ -180,8 +180,8 @@ function addDepartment() {
         name: "departmentName"
 
     }).then(function (answer) {
-        const query = "INSERT INTO department (name) VALUES ( ? )";
-        connection.query(query, answer.departmentName, function (err, res) {
+        const query = "INSERT INTO department SET ?";
+        connection.query(query, function (err, res) {
             console.log(`You have added ${answer.departmentName} to Departments`)
         })
         viewAllDepartments();
@@ -205,13 +205,21 @@ function addRole() {
             message: "What is the Department Id for the new role?",
             name: "depId"
         }
-    ]).then(function (answer) {
-        const query = "INSERT INTO role (name, salary, department_id) VALUES ( ? )";
-        connection.query(query, answer.roleName, answer.roleSalary, answer.depId, function (err, res) {
-            console.log(`You have added ${answer.roleName, answer.roleSalary, answer.depId}`);
-        })
+    ]).then(answers => {
+        connection.query("INSERT INTO role SET ?",
+            {
+                title: answers.roleName,
+                salary: answers.roleSalary,
+                department_id: answers.depId
+
+            }, (err, res) => {
+                if (err)
+                    throw err;
+
+            })
+
         viewAllRoles();
-    })
+    });
 }
 
 
