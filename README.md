@@ -1,7 +1,5 @@
 # hw12-employee-tracker
 
-
-
 ## Screenshot of Employee Tracker
 
 ![Employee Tracker](./screenshot/demo-screenshot.jpg)
@@ -12,11 +10,11 @@
 To run the app you will need to add the following command to the terminal
 
 ```
-node server.js
+node employee.js
 ```
 (Click on the image below to be redirected to the Youtube demo video)
 
-[![Employee Tracker Demo](./screenshot/demo-screenshot.jpg)]()
+[![Employee Tracker Demo](./screenshot/demo-screenshot.jpg)](https://youtu.be/SZzkB85ZCI4)
 
 ---
 ## My task
