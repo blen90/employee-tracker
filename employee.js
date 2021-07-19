@@ -256,83 +256,6 @@ function updateEmployeeRole() {
                     console.log(updatedRole);
 
 
-
-                })
-            })
-               
-        })
-
-        start();
-    })
-}
-
-//CONNECTION
-
-connection.connect((err) => {
-    if (err) throw err;
-    console.log(`connect as id ${connection.threadId}`)
-});
-
-//START FUNCTION
-
-start();
-
-
-// function updateEmployeeRole() {
-//     connection.query("SELECT * FROM employee", function (err, res) {
-//         if (err)
-//             throw err;
-
-//         inquirer.prompt([
-//             {
-//                 type: "list",
-//                 message: "Which employee's role would you like to change?",
-//                 name: "empName",
-//                 choices: function () {
-//                     employeeList = [];
-//                     res.forEach(res => {
-//                         employeeList.push(
-//                             res.first_name
-//                         );
-//                     })
-//                     return employeeList;
-//                 }
-//             }
-
-//         ]).then(function (answer) {
-//             const employeeName = answer;
-//             console.log(employeeName);
-
-//             connection.query("SELECT * FROM role", function (err, res) {
-//                 if (err)
-//                     throw err;
-
-//                 inquirer.prompt([
-//                     {
-//                         type: "list",
-//                         message: "What is the employee's new role?",
-//                         name: "title",
-//                         choices: function () {
-//                             roleList = [];
-//                             res.forEach(res => {
-//                                 roleList.push(
-//                                     res.title
-//                                 );
-//                             })
-//                             return roleList;
-//                         }
-//                     }
-//                 ]).then(answer => {
-//                     connection.query("INSERT INTO role SET ?",
-//                         {
-//                             title: answer.title,
-
-//                         }, (err, res) => {
-//                             if (err)
-//                                 throw err;
-
-//                         })
-
 //                     // connection.query("SELECT * FROM role", function (err, res) {
 //     if (err)
 //         throw err;
@@ -355,12 +278,28 @@ start();
 
 //     });
 //                     })
-//                 })
 
-//             })
-//         })
-//     })
-// }
+                })
+            })
+               
+        })
+
+        start();
+    })
+}
+
+//CONNECTION
+
+connection.connect((err) => {
+    if (err) throw err;
+    console.log(`connect as id ${connection.threadId}`)
+});
+
+//START FUNCTION
+
+start();
+
+
 
 
 
