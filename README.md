@@ -1,4 +1,4 @@
-# hw12-employee-tracker
+# Employee Tracker
 
 ## Screenshot of Employee Tracker
 
