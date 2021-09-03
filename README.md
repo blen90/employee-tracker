@@ -1,45 +1,72 @@
 # Employee Tracker
 
-## Screenshot of Employee Tracker
+[![GitHub license](https://img.shields.io/badge/License-MIT-blue.svg)]()
+
+# Description
+
+This app allows the user to manage an employee database with MYSQL. The user can view, add and select roles, departments and employees. 
+
+
+## Screenshots of the app
 
 ![Employee Tracker](./screenshot/demo-screenshot.jpg)
 
----
 ## Demo of the app
 
-To run the app you will need to add the following command to the terminal
-
-```
-node employee.js
-```
 (Click on the image below to be redirected to the Youtube demo video)
 
 [![Employee Tracker Demo](./screenshot/demo-screenshot.jpg)](https://youtu.be/SZzkB85ZCI4)
 
----
-## My task
 
-My task for this homework was to create an Employee Tracker to manage a company's employees using node, inquirer, and MySQL.
+# Table of Contents
 
-We have three different tables one for department, one for role and one for employee information. 
+* [Installation](#installation)
+    
+* [Usage](#usage)
 
-The department table has an id and the name of the department.
+* [Technology](#technology)
 
-The role table has and id, title of the employee (role), salary and the department id.
+* [License](#license)
 
-The employee table has the first and last names of the employee, role id and the manager id. 
+* [Contributors](#contributors)
+
+* [Questions](#questions)
+
+# Installation
 
 
----
-## Criteria
+* Open VS Code
+* Open the schema file in the folder ** ./db/schema.sql and copy the content in the file
+* Open MySQLWorkbench
+* Paste the content you copied from the schema file to create the DB
+* Go to the root of the folder and type to seed the tables you created on MYSQLWorkbench
+```npm run seed ```
 
-```
-Build a command-line application that at a minimum allows the user to:
+* Once you verify the tables have been seeded run the following command in the root of the project so you access the server
 
-  * Add departments, roles, employees
+```node server.js```
 
-  * View departments, roles, employees
 
-  * Update employee roles
+# Usage
 
-```
+The user can view, add and select roles, departments and employee using the command line. These results will appear in a table. 
+
+# Technology
+
+* NodeJs
+* InquirerJs
+* MySQL
+
+# License 
+
+This project is governed by: MIT License
+
+# Contributors
+
+Blenda Orellana
+
+# Questions
+
+If you have any questions about the repo or the app please feel free to contact me
+ * Email: blen.or90@gmail.com
+ * Github: https://github.com/blen90
